@@ -14,6 +14,7 @@ package com.yuntongxun.ecdemo.storage;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.text.TextUtils;
 
 import com.yuntongxun.ecdemo.common.CCPAppManager;
@@ -49,15 +50,19 @@ public class ContactSqlManager extends AbstractSQLManager {
     }
 
     public static boolean hasContact(String contactId) {
-        String sql = "select contact_id from contacts where contact_id = '" + contactId + "'";
-        Cursor cursor = getInstance().sqliteDB().rawQuery(sql, null);
-        if (cursor != null && cursor.getCount() > 0) {
-            if (!cursor.isClosed()) {
-                cursor.close();
+        try{
+            String sql = "select contact_id from contacts where contact_id = '" + contactId + "'";
+            Cursor cursor = getInstance().sqliteDB().rawQuery(sql, null);
+            if (cursor != null && cursor.getCount() > 0) {
+                if (!cursor.isClosed()) {
+                    cursor.close();
+                }
+                return true;
             }
+            return false;
+        }catch (SQLException e){
             return true;
         }
-        return false;
     }
 
     /**
