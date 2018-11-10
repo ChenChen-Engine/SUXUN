@@ -993,6 +993,15 @@
             android:name=".ui.activity.RegisterActivity"
             android:screenOrientation="portrait" />
 
+        <!--蒲公英SDK-->
+        <provider
+            android:name="com.pgyersdk.PgyerProvider"
+            android:authorities="${applicationId}.com.pgyer.provider"
+            android:exported="false"/>
+        <meta-data
+            android:name="PGYER_APPID"
+            android:value="0adb59122452f808b693adf4f8ff30c5" >
+        </meta-data>
     </application>
 
 </manifest>
